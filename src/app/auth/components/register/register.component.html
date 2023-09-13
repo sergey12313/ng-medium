@@ -6,7 +6,7 @@
   <h2 class="text-2xl font-medium">Регистрация</h2>
   <a href="#" class="text-indigo-400 hover:text-indigo-500">Есть аккаунт?</a>
   <div
-    class="shadow-shadowCard rounded-md p-12 min-w-[400px] flex flex-col gap-8 pt-12 pb-20"
+    class="shadow-shadowCard rounded-md p-12 min-w-[460px] flex flex-col gap-8 pt-12 pb-20"
   >
     <div class="flex flex-col gap-2">
       <label class="text-slate-500 font-medium text-sm">Логин</label>
@@ -35,8 +35,9 @@
   </div>
 
   <button
-    class="bg-primary px-14 py-3 rounded text-white text-xs font-medium hover:bg-indigo-500"
+    class="bg-primary px-14 py-3 rounded text-white text-xs font-medium cursor-pointer hover:bg-indigo-500 disabled:bg-slate-400 disabled:cursor-not-allowed"
     type="submit"
+    [disabled]="isSubmitting$ | async"
   >
     Зарегистрироваться
   </button>
