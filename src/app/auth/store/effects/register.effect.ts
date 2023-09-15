@@ -11,6 +11,7 @@ import {
 import {of} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PersistenceService} from 'src/app/shared/service/persistence.service';
+import {Router} from '@angular/router';
 
 export const registerEffect = createEffect(
   (
@@ -38,4 +39,17 @@ export const registerEffect = createEffect(
     );
   },
   {functional: true}
+);
+
+export const redirectAfterSubmitEffect = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(registerSuccessAction),
+      tap(() => {
+        console.log('redirect');
+        router.navigate(['/']);
+      })
+    );
+  },
+  {functional: true, dispatch: false}
 );

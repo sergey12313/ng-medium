@@ -9,10 +9,10 @@ import {AuthService} from './services/auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import {EffectsModule} from '@ngrx/effects';
 import {registerEffect} from './store/effects/register.effect';
-import * as actorsEffects from './store/effects/register.effect';
+import * as authEffects from './store/effects/register.effect';
 import {BackendErrorMessageModule} from '../shared/modules/backendErrorMessages/backendErrorMessages.module';
 import {PersistenceService} from '../shared/service/persistence.service';
-console.dir(actorsEffects);
+
 const routes: Routes = [
   {
     path: 'register',
@@ -30,7 +30,7 @@ const routes: Routes = [
     StoreModule.forFeature('auth', authReducer),
     HttpClientModule,
     BackendErrorMessageModule,
-    EffectsModule.forFeature([{registerEffect}]),
+    EffectsModule.forFeature(authEffects),
   ],
 })
 export class AuthModule {}
