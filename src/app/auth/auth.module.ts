@@ -11,7 +11,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {registerEffect} from './store/effects/register.effect';
 import * as actorsEffects from './store/effects/register.effect';
 import {BackendErrorMessageModule} from '../shared/modules/backendErrorMessages/backendErrorMessages.module';
-import {PersistenceService} from '../shared/service/persistence.server';
+import {PersistenceService} from '../shared/service/persistence.service';
 console.dir(actorsEffects);
 const routes: Routes = [
   {
