@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface';
 import {HttpClient} from '@angular/common/http';
-import {environment} from 'src/environments/environment.development';
+import {environment} from 'src/environments/environment';
 import {AuthResponseInterface} from '../types/authResponse.interface';
 
 @Injectable()
