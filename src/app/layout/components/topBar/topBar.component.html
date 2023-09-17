@@ -1,0 +1,33 @@
+<header class="h-16 shadow-shadowCard">
+  <div class="container mx-auto flex justify-between items-center h-full">
+    <a href="/" class="text-primary font-black text-xl">ng-medium</a>
+    <nav class="text-slate-400 flex gap-4 text-md">
+      <a
+        [routerLink]="['/']"
+        routerLinkActive="text-indigo-400"
+        [routerLinkActiveOptions]="{exact: true}"
+        >Главная</a
+      >
+      <ng-container *ngIf="isLoggedIn$ | async; else authLinks ">
+        <a href="#" routerLinkActive="text-indigo-400" class="inline-flex gap-1 items-center"><ng-icon name="matPostAdd"></ng-icon>
+          Новый пост</a>
+        <a href="#" routerLinkActive="text-indigo-400" class="inline-flex gap-1 items-center"> <ng-icon name="matSettings"></ng-icon>Настройки</a>
+      <ng-container *ngIf="currentUser">
+        <a href="#" class="inline-flex gap-1">
+          <div class="items-center rounded-full overflow-hidden w-6 h-6"><img [src]="currentUser.image" class="w-full h-auto"/></div>
+          {{currentUser.username}}
+        </a>
+
+      </ng-container>
+      </ng-container>
+
+      <ng-template #authLinks>
+        <a [routerLink]="['/login']" routerLinkActive="text-indigo-400">Войти</a>
+        <a [routerLink]="['/register']" routerLinkActive="text-indigo-400"
+          >Регистрация</a
+        >
+      </ng-template>
+
+    </nav>
+  </div>
+</header>

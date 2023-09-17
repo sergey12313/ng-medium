@@ -33,7 +33,7 @@ body {
   &__label {
     @apply text-slate-500 font-medium text-sm;
   }
-  &__group {
+  &__fieldset {
     @apply flex flex-col gap-2;
   }
 }

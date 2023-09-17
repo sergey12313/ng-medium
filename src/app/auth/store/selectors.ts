@@ -12,3 +12,13 @@ export const backendErrorsSelector = createSelector(
   authFeatureSelector,
   (state) => state.validationErrors
 );
+
+export const isLoggedInSelector = createSelector(
+  authFeatureSelector,
+  (state) => state.isLoggedIn
+);
+
+export const userSelector = createSelector(
+  authFeatureSelector,
+  (state) => state.currentUser
+);

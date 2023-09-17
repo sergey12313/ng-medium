@@ -1,18 +1,2 @@
-<header class="h-16 shadow-shadowCard">
-  <div class="container mx-auto flex justify-between items-center h-full">
-    <a href="/" class="text-primary font-black text-xl">ng-medium</a>
-    <div class="text-slate-400 flex gap-4 text-md">
-      <a
-        [routerLink]="['/']"
-        routerLinkActive="text-indigo-400"
-        [routerLinkActiveOptions]="{exact: true}"
-        >Главная</a
-      >
-      <a [routerLink]="['/login']" routerLinkActive="text-indigo-400">Войти</a>
-      <a [routerLink]="['/register']" routerLinkActive="text-indigo-400"
-        >Регистрация</a
-      >
-    </div>
-  </div>
-</header>
+<app-top-bar></app-top-bar>
 <router-outlet></router-outlet>
