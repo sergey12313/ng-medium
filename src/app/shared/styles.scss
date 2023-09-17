@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Comfortaa', cursive;
+  font-family: 'Inter', sans-serif;
+}
+
+.input {
+  @apply px-3 py-4 border rounded-md outline-none  focus:outline-primary focus:outline-offset-0;
+}
+.form-label {
+  @apply text-slate-500 font-medium text-sm;
+}
+
+.link {
+  @apply text-indigo-400 hover:text-indigo-500;
+}
+
+.button {
+  @apply bg-primary px-14 py-3 rounded text-white text-xs font-medium cursor-pointer hover:bg-indigo-500 focus:bg-indigo-500 disabled:bg-slate-400 disabled:cursor-not-allowed outline-none  focus:outline-primary focus:outline-offset-0;
+}
+.auth-form {
+  @apply flex justify-center mt-12 items-center flex-col gap-4;
+  &__title {
+    @apply text-2xl font-medium;
+  }
+  &__card {
+    @apply shadow-shadowCard rounded-md p-12 min-w-[460px] flex flex-col gap-8 pt-12 pb-20;
+  }
+  &__label {
+    @apply text-slate-500 font-medium text-sm;
+  }
+  &__group {
+    @apply flex flex-col gap-2;
+  }
+}

@@ -3,21 +3,12 @@
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
 >
-  <h2 class="auth-form__title">Регистрация</h2>
-  <a [routerLink]="['/login']" class="link">Есть аккаунт?</a>
+  <h2 class="auth-form__title">Вход</h2>
+  <a [routerLink]="['/register']" class="link">Нет аккаунта?</a>
   <mc-backend-error-messages  [errors]="backendErrors$ | async"></mc-backend-error-messages>
   <div
     class="auth-form__card"
   >
-    <div class="auth-form__group">
-      <label class="auth-form__label" for="username">Логин</label>
-      <input
-        type="text"
-        class="input"
-        formControlName="username"
-        id="username"
-      />
-    </div>
     <div class="auth-form__group">
       <label class="auth-form__label" for="email">Email</label>
       <input
@@ -43,6 +34,6 @@
     type="submit"
     [disabled]="isSubmitting$ | async"
   >
-    Зарегистрироваться
+    Войти
   </button>
 </form>

@@ -3,36 +3,38 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {AuthService} from '../../services/auth.service';
 import {environment} from 'src/environments/environment';
 import {map, exhaustMap, catchError, tap} from 'rxjs/operators';
-import {
-  registerAction,
-  registerFailureAction,
-  registerSuccessAction,
-} from '../action/register.action';
+
 import {of} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {PersistenceService} from 'src/app/shared/service/persistence.service';
-import {Router} from '@angular/router';
 
-export const registerEffect = createEffect(
+import {
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+} from '../action/login.action';
+
+export const loginEffect = createEffect(
   (
     actions$ = inject(Actions),
     authService = inject(AuthService),
     persistenceService = inject(PersistenceService)
   ) => {
     return actions$.pipe(
-      ofType(registerAction),
+      ofType(loginAction),
       map((action) => action.request),
       exhaustMap((request) => {
-        return authService.register(request).pipe(
+        return authService.login(request).pipe(
           map((currentUser) => {
             persistenceService.set(
               environment.localStorageTokenKey,
               currentUser.token
             );
-            return registerSuccessAction({currentUser});
+            console.log(currentUser);
+            return loginSuccessAction({currentUser});
           }),
           catchError((errorsResponse: HttpErrorResponse) => {
-            return of(registerFailureAction(errorsResponse.error));
+            return of(loginFailureAction(errorsResponse.error));
           })
         );
       })
@@ -40,4 +42,3 @@ export const registerEffect = createEffect(
   },
   {functional: true}
 );
-

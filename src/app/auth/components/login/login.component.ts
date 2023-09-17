@@ -1,22 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Store, select} from '@ngrx/store';
-import {registerAction} from '../../store/action/register.action';
 import {Observable} from 'rxjs';
 import {
   backendErrorsSelector,
   isSubmittingSelector,
 } from '../../store/selectors';
-import {RegisterRequestInterface} from '../../types/registerRequest.interface';
+
 import {Nullable} from 'src/app/shared/types/util.types';
 import {BackendErrorsInterface} from 'src/app/shared/types/backendErrors.interface';
+import {LoginRequestInterface} from '../../types/loginRequest.interface';
+import {loginAction} from '../../store/action/login.action';
 
 @Component({
-  selector: 'mc-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'mc-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class LoginComponent implements OnInit {
   form!: FormGroup;
   isSubmitting$!: Observable<boolean>;
   backendErrors$!: Observable<Nullable<BackendErrorsInterface>>;
@@ -30,7 +31,6 @@ export class RegisterComponent implements OnInit {
 
   initializeForm(): void {
     this.form = this.formBuilder.group({
-      username: ['serg12'],
       email: ['serg12@qwer.ru'],
       password: ['12345678'],
     });
@@ -41,9 +41,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    const request: RegisterRequestInterface = {
+    const request: LoginRequestInterface = {
       user: this.form.value,
     };
-    this.store.dispatch(registerAction({request}));
+    this.store.dispatch(loginAction({request}));
   }
 }

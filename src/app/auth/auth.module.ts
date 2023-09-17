@@ -8,20 +8,27 @@ import {authReducer} from './store/reducer';
 import {AuthService} from './services/auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import {EffectsModule} from '@ngrx/effects';
-import {registerEffect} from './store/effects/register.effect';
-import * as authEffects from './store/effects/register.effect';
+
+import * as registerEffect from './store/effects/register.effect';
+import * as loginEffect from './store/effects/login.effect';
+import * as redirectAfterSubmit from './store/effects/redirectAfterSubmit.effect';
 import {BackendErrorMessageModule} from '../shared/modules/backendErrorMessages/backendErrorMessages.module';
 import {PersistenceService} from '../shared/service/persistence.service';
+import {LoginComponent} from './components/login/login.component';
 
 const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
   },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, LoginComponent],
   providers: [AuthService, PersistenceService],
   imports: [
     CommonModule,
@@ -30,7 +37,11 @@ const routes: Routes = [
     StoreModule.forFeature('auth', authReducer),
     HttpClientModule,
     BackendErrorMessageModule,
-    EffectsModule.forFeature(authEffects),
+    EffectsModule.forFeature({
+      ...registerEffect,
+      ...loginEffect,
+      ...redirectAfterSubmit,
+    }),
   ],
 })
 export class AuthModule {}

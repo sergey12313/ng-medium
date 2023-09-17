@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {BackendErrorsInterface} from '../../types/backendErrors.intreface';
+import {BackendErrorsInterface} from '../../types/backendErrors.interface';
 import {Nullable} from '../../types/util.types';
 
 @Component({
