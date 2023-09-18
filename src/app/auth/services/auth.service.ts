@@ -29,4 +29,10 @@ export class AuthService {
       .post<AuthResponseInterface>(`${environment.apiUrl}users/login`, data)
       .pipe(map(this.getUserFromResponse));
   }
+
+  getCurrentUser() {
+    return this.httpClient
+      .get<AuthResponseInterface>(`${environment.apiUrl}user`)
+      .pipe(map(this.getUserFromResponse));
+  }
 }

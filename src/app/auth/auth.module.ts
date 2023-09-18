@@ -12,6 +12,7 @@ import {EffectsModule} from '@ngrx/effects';
 import * as registerEffect from './store/effects/register.effect';
 import * as loginEffect from './store/effects/login.effect';
 import * as redirectAfterSubmit from './store/effects/redirectAfterSubmit.effect';
+import * as getCurrentUser from './store/effects/getCurrentUser.effect';
 import {BackendErrorMessageModule} from '../shared/modules/backendErrorMessages/backendErrorMessages.module';
 import {PersistenceService} from '../shared/service/persistence.service';
 import {LoginComponent} from './components/login/login.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
       ...registerEffect,
       ...loginEffect,
       ...redirectAfterSubmit,
+      ...getCurrentUser,
     }),
   ],
 })
