@@ -13,8 +13,8 @@ import {
 import {
   getCurrentUserAction,
   getCurrentUserFailureAction,
-  getCurrentUserTokenNotFoundAction,
-} from '../action/getCurrentUser';
+  getCurrentUserSuccessAction,
+} from '../action/getCurrentUser.action';
 
 export const getCurrentUserEffect = createEffect(
   (
@@ -24,19 +24,18 @@ export const getCurrentUserEffect = createEffect(
   ) => {
     return actions$.pipe(
       ofType(getCurrentUserAction),
-      exhaustMap((request) => {
-        const token = persistenceService.get(environment.localStorageTokenKey);
-        if (!token) {
-          return of(getCurrentUserTokenNotFoundAction());
+      exhaustMap(() => {
+        if (!persistenceService.get(environment.localStorageTokenKey)) {
+          return of(getCurrentUserFailureAction());
         }
-        return authService.getCurrentUser(token).pipe(
+        return authService.getCurrentUser().pipe(
           map((currentUser) => {
             persistenceService.set(
               environment.localStorageTokenKey,
               currentUser.token
             );
             console.log(currentUser);
-            return loginSuccessAction({currentUser});
+            return getCurrentUserSuccessAction({currentUser});
           }),
           catchError(() => {
             return of(getCurrentUserFailureAction());

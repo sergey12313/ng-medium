@@ -30,13 +30,9 @@ export class AuthService {
       .pipe(map(this.getUserFromResponse));
   }
 
-  getCurrentUser(token: string) {
+  getCurrentUser() {
     return this.httpClient
-      .get<AuthResponseInterface>(`${environment.apiUrl}users`, {
-        headers: {
-          ['Authorization']: `Token ${token}`,
-        },
-      })
+      .get<AuthResponseInterface>(`${environment.apiUrl}user`)
       .pipe(map(this.getUserFromResponse));
   }
 }

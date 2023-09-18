@@ -8,6 +8,9 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {LayoutModule} from './layout/layout.module';
+import {PersistenceService} from './shared/service/persistence.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './shared/service/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +23,10 @@ import {LayoutModule} from './layout/layout.module';
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     EffectsModule.forRoot([]),
   ],
-  providers: [],
+  providers: [
+    PersistenceService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

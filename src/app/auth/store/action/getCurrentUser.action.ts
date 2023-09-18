@@ -12,7 +12,3 @@ export const getCurrentUserSuccessAction = createAction(
 export const getCurrentUserFailureAction = createAction(
   ActionTypes.GET_CURRENT_USER_FAILURE
 );
-
-export const getCurrentUserTokenNotFoundAction = createAction(
-  ActionTypes.GET_CURRENT_USER_TOKEN_NOT_FOUND
-);
