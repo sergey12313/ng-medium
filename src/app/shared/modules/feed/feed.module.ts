@@ -8,6 +8,7 @@ import {StoreModule} from '@ngrx/store';
 import {feedReducer} from './store/reducer';
 import {FeedComponent} from './components/feed/feed.component';
 import {ArticlePreviewModule} from '../articlePreview/articlePreview.module';
+import {PaginatorModule} from '../paginator/paginator.module';
 
 @NgModule({
   declarations: [FeedComponent],
@@ -16,7 +17,7 @@ import {ArticlePreviewModule} from '../articlePreview/articlePreview.module';
   imports: [
     CommonModule,
     ArticlePreviewModule,
-
+    PaginatorModule,
     EffectsModule.forFeature({...getUserEffect}),
     StoreModule.forFeature('feed', feedReducer),
   ],
