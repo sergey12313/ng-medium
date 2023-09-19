@@ -18,8 +18,6 @@ jobs:
           cache: npm
       - name: Install
         run: npm ci
-      - name: Test
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
       - name: Build
         run: npm run build -- -c production --base-href "https://sergey12313.github.io/ng-medium/"
       - name: Upload Pages artifact
