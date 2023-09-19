@@ -5,6 +5,7 @@ import {RouterModule} from '@angular/router';
 import {NgIconsModule} from '@ng-icons/core';
 import {matPostAdd, matSettings} from '@ng-icons/material-icons/baseline';
 import {TopBarComponent} from './components/topBar.component';
+import {AvatarModule} from 'src/app/shared/modules/avatar/avatar.module';
 
 @NgModule({
   declarations: [TopBarComponent],
@@ -12,6 +13,7 @@ import {TopBarComponent} from './components/topBar.component';
   providers: [],
   imports: [
     CommonModule,
+    AvatarModule,
     RouterModule,
     NgIconsModule.withIcons({matPostAdd, matSettings}),
   ],

@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Store, select} from '@ngrx/store';
-import {getFeedAction} from '../store/actions/getFeed.action';
+
 import {Observable} from 'rxjs';
-import {feedDataSelector} from '../store/selectors';
+
 import {Nullable} from 'src/app/shared/types/util.types';
-import {FeedResponseInterface} from '../types/feedResponse.Interface';
+import {getFeedAction} from '../../store/actions/getFeed.action';
+import {feedDataSelector} from '../../store/selectors';
+import {FeedResponseInterface} from '../../types/feedResponse.Interface';
 
 @Component({
   selector: 'mc-feed',
