@@ -18,3 +18,7 @@ export const feedErrorSelector = createSelector(
   feedFeatureSelector,
   (state) => state.error
 );
+export const feedTotalCount = createSelector(
+  feedFeatureSelector,
+  (state) => state.data?.articlesCount ?? null
+);

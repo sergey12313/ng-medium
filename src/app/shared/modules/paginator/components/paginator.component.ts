@@ -1,21 +1,22 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, computed, signal} from '@angular/core';
+import {environment} from 'src/environments/environment';
 
 @Component({
   // templateUrl: 'paginator.component.html',
   selector: 'mc-paginator',
   styleUrls: ['paginator.component.scss'],
   template: `<div class="flex justify-between">
-    <button class="paginator__arrow" [disabled]="isFirst">
+    <button class="paginator__arrow" [disabled]="isFirstPage()">
       <ng-icon name="heroArrowLeftMini"></ng-icon> <span>Сюда</span>
     </button>
     <div class="paginator">
-      <a *ngFor="let page of startLinks" href="#" class="paginator__link">{{
+      <a *ngFor="let page of leftLinks()" href="#" class="paginator__link">{{
         page
       }}</a>
-      <span *ngIf="isStartDots">...</span>
-      <ng-container *ngFor="let page of paginatorItems">
+      <span *ngIf="isNeedLeftDots()">...</span>
+      <ng-container *ngFor="let page of paginatorItems()">
         <span
-          *ngIf="page === currentPage; else link"
+          *ngIf="page === currentPageProp(); else link"
           class="paginator__active-page"
           >{{ page }}</span
         >
@@ -25,82 +26,82 @@ import {Component, Input} from '@angular/core';
           }}</a></ng-template
         >
       </ng-container>
-      <span *ngIf="isEndDots">...</span>
-      <a *ngFor="let page of endLinks" href="#" class="paginator__link">{{
+      <span *ngIf="isNeedRightDots()">...</span>
+      <a *ngFor="let page of rightLinks()" href="#" class="paginator__link">{{
         page
       }}</a>
     </div>
-    <button class="paginator__arrow" [disabled]="isLast">
+    <button class="paginator__arrow" [disabled]="isLastPage()">
       <span>Туда</span><ng-icon name="heroArrowRightMini"></ng-icon>
     </button>
   </div>`,
 })
 export class PaginatorComponent {
-  total = 500;
-  limit = 10;
-  currentPage = 1;
+  limit = environment.feedPostLimit;
+  pageRangeDisplayed = 5;
 
-  count = 5;
+  totalProps = signal<number>(1);
 
-  get totalPages() {
-    return Math.ceil(this.total / this.limit);
+  @Input() set total(value: number) {
+    this.totalProps.set(value);
+  }
+  currentPageProp = signal<number>(1);
+  @Input() set currentPage(value: number) {
+    this.currentPageProp.set(value);
   }
 
-  get middleValue() {
-    return Math.floor(this.count / 2);
-  }
+  middleValue = computed(() =>
+    Math.min(Math.floor(this.pageRangeDisplayed / 2), this.totalProps())
+  );
 
-  get paginatorItems(): Array<number> {
+  totalPages = computed(() => Math.ceil(this.totalProps() / this.limit));
+
+  paginatorItems = computed(() => {
     if (this.total < this.limit) {
       return [1];
     }
     return Array.from(
-      {length: this.count},
-      (_, index) => index + this.currentPage - this.middleValue
+      {length: this.pageRangeDisplayed},
+      (_, index) => index + this.currentPageProp() - this.middleValue()
     )
       .filter((el) => el > 0)
-      .filter((el) => el <= this.totalPages);
-  }
+      .filter((el) => el <= this.totalPages());
+  });
 
-  get startLinks(): Array<number> {
-    const items = Array.from(
-      {length: this.middleValue},
-      (_, index) => index + 1
-    ).filter((i) => !this.paginatorItems.includes(i));
-    return items;
-  }
-  get isStartDots() {
-    if (this.startLinks.length === 0) {
+  leftLinks = computed(() =>
+    Array.from({length: this.middleValue()}, (_, index) => index + 1).filter(
+      (i) => !this.paginatorItems().includes(i)
+    )
+  );
+
+  rightLinks = computed(() =>
+    Array.from(
+      {length: this.middleValue()},
+      (_, index) => this.totalPages() - this.middleValue() + index + 1
+    ).filter((i) => !this.paginatorItems().includes(i))
+  );
+
+  isNeedLeftDots = computed(() => {
+    console.log(this.leftLinks());
+    if (this.leftLinks().length === 0) {
       return false;
     }
-    if (this.startLinks.slice(-1)[0] + 1 === this.paginatorItems[0]) {
-      return false;
-    }
-    return true;
-  }
-
-  get isFirst() {
-    return this.currentPage === 1;
-  }
-  get isLast() {
-    return this.currentPage === this.totalPages;
-  }
-
-  get endLinks(): Array<number> {
-    const items = Array.from(
-      {length: this.middleValue},
-      (_, index) => this.totalPages - this.middleValue + index + 1
-    ).filter((i) => !this.paginatorItems.includes(i));
-    return items;
-  }
-
-  get isEndDots() {
-    if (this.endLinks.length === 0) {
-      return false;
-    }
-    if (this.endLinks[0] - 1 === this.paginatorItems.slice(-1)[0]) {
+    if (this.leftLinks().slice(-1)[0] + 1 === this.paginatorItems()[0]) {
       return false;
     }
     return true;
-  }
+  });
+
+  isNeedRightDots = computed(() => {
+    if (this.rightLinks().length === 0) {
+      return false;
+    }
+    if (this.rightLinks()[0] - 1 === this.paginatorItems().slice(-1)[0]) {
+      return false;
+    }
+    return true;
+  });
+
+  isFirstPage = computed(() => this.currentPageProp() === 1);
+  isLastPage = computed(() => this.currentPageProp() === this.totalPages());
 }

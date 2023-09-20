@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 
 import {Nullable} from 'src/app/shared/types/util.types';
 import {getFeedAction} from '../../store/actions/getFeed.action';
-import {feedDataSelector} from '../../store/selectors';
+import {feedDataSelector, feedTotalCount} from '../../store/selectors';
 import {FeedResponseInterface} from '../../types/feedResponse.Interface';
 
 @Component({
@@ -17,6 +17,7 @@ export class FeedComponent implements OnInit {
   constructor(readonly store: Store) {}
 
   feedData$!: Observable<Nullable<FeedResponseInterface>>;
+  totalArticles$!: Observable<Nullable<number>>;
 
   @Input({alias: 'slug', required: true}) slugProps!: string;
 
@@ -32,5 +33,6 @@ export class FeedComponent implements OnInit {
 
   private initializeValue(): void {
     this.feedData$ = this.store.pipe(select(feedDataSelector));
+    this.totalArticles$ = this.store.pipe(select(feedTotalCount));
   }
 }
