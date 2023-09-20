@@ -2,9 +2,14 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 
 import {PaginatorComponent} from './components/paginator.component';
+import {NgIconsModule} from '@ng-icons/core';
+import {heroArrowLeftMini, heroArrowRightMini} from '@ng-icons/heroicons/mini';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    NgIconsModule.withIcons({heroArrowLeftMini, heroArrowRightMini}),
+  ],
   declarations: [PaginatorComponent],
   exports: [PaginatorComponent],
 })
