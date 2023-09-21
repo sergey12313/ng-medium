@@ -15,7 +15,7 @@ const initialState: FeedStateInterface = {
 export const feedReducer = createReducer(
   initialState,
   on(getFeedAction, (state) => ({
-    ...state,
+    data: null,
     isLoading: true,
     error: null,
   })),

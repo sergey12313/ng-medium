@@ -1,0 +1,24 @@
+.paginator {
+  @apply inline-flex gap-2 items-center my-5;
+
+  &__link {
+    @apply hover:text-primary;
+  }
+
+  &__arrow {
+    @apply flex gap-1 items-center;
+    span {
+      @apply text-primary;
+    }
+    &:disabled {
+      @apply text-slate-400;
+      span {
+        @apply text-slate-400;
+      }
+    }
+  }
+
+  &__active-page {
+    @apply border-primary border p-1 min-w-[30px] text-center rounded text-primary;
+  }
+}

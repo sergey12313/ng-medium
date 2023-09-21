@@ -14,6 +14,7 @@ import {GlobalFeedModule} from './layout/modules/globalFeed/globalFeed.module';
 import {TopBarModule} from './layout/modules/topBar/topBar.module';
 import {registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 
 registerLocaleData(localeRu);
 
@@ -21,6 +22,7 @@ registerLocaleData(localeRu);
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    NgxSkeletonLoaderModule,
     AppRoutingModule,
     TopBarModule,
     GlobalFeedModule,
