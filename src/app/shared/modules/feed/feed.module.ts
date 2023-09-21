@@ -9,15 +9,18 @@ import {feedReducer} from './store/reducer';
 import {FeedComponent} from './components/feed/feed.component';
 import {ArticlePreviewModule} from '../articlePreview/articlePreview.module';
 import {PaginatorModule} from '../paginator/paginator.module';
+import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import {FeedSkeletonComponent} from './components/skeleton/feedSkeleton.component';
 
 @NgModule({
-  declarations: [FeedComponent],
+  declarations: [FeedComponent, FeedSkeletonComponent],
   exports: [FeedComponent],
   providers: [FeedService],
   imports: [
     CommonModule,
     ArticlePreviewModule,
     PaginatorModule,
+    NgxSkeletonLoaderModule,
     EffectsModule.forFeature({...getUserEffect}),
     StoreModule.forFeature('feed', feedReducer),
   ],

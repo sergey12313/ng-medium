@@ -4,7 +4,7 @@ import {FeedResponseInterface} from '../../types/feedResponse.Interface';
 
 export const getFeedAction = createAction(
   ActionTypes.GET_FEED,
-  props<{slug: string}>()
+  props<{slug: string; options?: {limit: number; offset: number}}>()
 );
 export const getFeedSuccessAction = createAction(
   ActionTypes.GET_FEED_SUCCESS,

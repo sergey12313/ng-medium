@@ -60,11 +60,13 @@ export class PaginatorComponent {
 
   totalProps = signal<number>(1);
   @Input() set total(value: number) {
+    console.log('total', value);
     this.totalProps.set(value);
   }
 
   currentPageProp = signal<number>(1);
   @Input() set currentPage(value: number) {
+    console.log('currentPage', value);
     this.currentPageProp.set(value);
   }
 

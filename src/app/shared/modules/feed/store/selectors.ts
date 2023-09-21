@@ -4,7 +4,7 @@ import {FeedStateInterface} from './feedState.interface';
 export const feedFeatureSelector =
   createFeatureSelector<FeedStateInterface>('feed');
 
-export const isLoadingSelector = createSelector(
+export const feedIsLoadingSelector = createSelector(
   feedFeatureSelector,
   (state) => state.isLoading
 );
