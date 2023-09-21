@@ -1,5 +1,5 @@
 .paginator {
-  @apply inline-flex gap-2 items-center;
+  @apply inline-flex gap-2 items-center my-5;
 
   &__link {
     @apply hover:text-primary;

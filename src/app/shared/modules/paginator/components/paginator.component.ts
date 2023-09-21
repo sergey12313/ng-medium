@@ -1,4 +1,5 @@
-import {Component, Input, computed, signal} from '@angular/core';
+import {Component, Input, computed, inject, signal} from '@angular/core';
+import {Router} from '@angular/router';
 import {environment} from 'src/environments/environment';
 
 @Component({
@@ -6,13 +7,21 @@ import {environment} from 'src/environments/environment';
   selector: 'mc-paginator',
   styleUrls: ['paginator.component.scss'],
   template: `<div class="flex justify-between">
-    <button class="paginator__arrow" [disabled]="isFirstPage()">
+    <button
+      class="paginator__arrow"
+      [disabled]="isFirstPage()"
+      (click)="prev()"
+    >
       <ng-icon name="heroArrowLeftMini"></ng-icon> <span>Сюда</span>
     </button>
     <div class="paginator">
-      <a *ngFor="let page of leftLinks()" href="#" class="paginator__link">{{
-        page
-      }}</a>
+      <a
+        *ngFor="let page of leftLinks()"
+        [routerLink]="[urlProps]"
+        [queryParams]="{page: page}"
+        class="paginator__link"
+        >{{ page }}</a
+      >
       <span *ngIf="isNeedLeftDots()">...</span>
       <ng-container *ngFor="let page of paginatorItems()">
         <span
@@ -21,17 +30,24 @@ import {environment} from 'src/environments/environment';
           >{{ page }}</span
         >
         <ng-template #link>
-          <a class="paginator__link" [href]="'/' + page">{{
-            page
-          }}</a></ng-template
+          <a
+            class="paginator__link"
+            [routerLink]="[urlProps]"
+            [queryParams]="{page: page}"
+            >{{ page }}</a
+          ></ng-template
         >
       </ng-container>
       <span *ngIf="isNeedRightDots()">...</span>
-      <a *ngFor="let page of rightLinks()" href="#" class="paginator__link">{{
-        page
-      }}</a>
+      <a
+        *ngFor="let page of rightLinks()"
+        [routerLink]="[urlProps]"
+        [queryParams]="{page: page}"
+        class="paginator__link"
+        >{{ page }}</a
+      >
     </div>
-    <button class="paginator__arrow" [disabled]="isLastPage()">
+    <button class="paginator__arrow" [disabled]="isLastPage()" (click)="next()">
       <span>Туда</span><ng-icon name="heroArrowRightMini"></ng-icon>
     </button>
   </div>`,
@@ -40,15 +56,19 @@ export class PaginatorComponent {
   limit = environment.feedPostLimit;
   pageRangeDisplayed = 5;
 
-  totalProps = signal<number>(1);
+  private readonly router = inject(Router);
 
+  totalProps = signal<number>(1);
   @Input() set total(value: number) {
     this.totalProps.set(value);
   }
+
   currentPageProp = signal<number>(1);
   @Input() set currentPage(value: number) {
     this.currentPageProp.set(value);
   }
+
+  @Input({required: true, alias: 'url'}) urlProps!: string;
 
   middleValue = computed(() =>
     Math.min(Math.floor(this.pageRangeDisplayed / 2), this.totalProps())
@@ -82,7 +102,6 @@ export class PaginatorComponent {
   );
 
   isNeedLeftDots = computed(() => {
-    console.log(this.leftLinks());
     if (this.leftLinks().length === 0) {
       return false;
     }
@@ -104,4 +123,15 @@ export class PaginatorComponent {
 
   isFirstPage = computed(() => this.currentPageProp() === 1);
   isLastPage = computed(() => this.currentPageProp() === this.totalPages());
+
+  prev() {
+    this.router.navigate([this.urlProps], {
+      queryParams: {page: this.currentPageProp() - 1},
+    });
+  }
+  next() {
+    this.router.navigate([this.urlProps], {
+      queryParams: {page: this.currentPageProp() + 1},
+    });
+  }
 }

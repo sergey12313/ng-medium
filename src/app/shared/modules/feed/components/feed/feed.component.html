@@ -1,7 +1,11 @@
-<mc-paginator [total]="(totalArticles$ | async) || 0" [currentPage]="6" ></mc-paginator>
 <div class="flex flex-col gap-5">
   <mc-article-preview
     *ngFor="let article of (feedData$ | async)?.articles"
     [article]="article"
   ></mc-article-preview>
 </div>
+<mc-paginator
+  [total]="(totalArticles$ | async) || 0"
+  [currentPage]="(currentPage$ | async) || 1"
+  [url]="baseUrl"
+></mc-paginator>
