@@ -23,12 +23,7 @@
       >Читать далее</a
     >
     <div class="inline-flex gap-1">
-      <a
-        href="#"
-        *ngFor="let tag of articleProps.tagList"
-        class="text-xs border text-slate-400 border-slate-400 inline-block px-3 py-[2px] rounded-full hover:text-primary hover:border-primary"
-        >{{ tag }}</a
-      >
+      <mc-tag *ngFor="let tag of articleProps.tagList" [tag]="tag"></mc-tag>
     </div>
   </div>
 </article>
