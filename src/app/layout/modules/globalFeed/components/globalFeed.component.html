@@ -1,10 +1,10 @@
 <div class="container mx-auto mt-8">
-  global feed
-  <div class="flex gap-5">
-    <div class="w-9/12">
+  <mc-feed-selector></mc-feed-selector>
+  <div class="flex gap-5 flex-col lg:flex-row px-2 min-w-[370px] lg:px-auto">
+    <div class="lg:w-9/12">
       <mc-feed slug="articles"></mc-feed>
     </div>
-    <div class="self-start w-3/12">
+    <div class="-order-1 lg:order-none lg:w-3/12">
       <mc-tag-list></mc-tag-list>
     </div>
   </div>

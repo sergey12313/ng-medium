@@ -3,7 +3,7 @@
   <div class="flex gap-5 flex-col lg:flex-row px-2 min-w-[370px] lg:px-auto">
     <mc-feed-selector></mc-feed-selector>
     <div class="lg:w-9/12">
-      <mc-feed [slug]="'articles?tag=' + (tagName$ | async)"></mc-feed>
+      <mc-feed slug="articles/feed"></mc-feed>
     </div>
     <div class="-order-1 lg:order-none lg:w-3/12">
       <mc-tag-list></mc-tag-list>

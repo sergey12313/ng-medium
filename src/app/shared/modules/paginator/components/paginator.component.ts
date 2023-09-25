@@ -6,7 +6,7 @@ import {environment} from 'src/environments/environment';
   // templateUrl: 'paginator.component.html',
   selector: 'mc-paginator',
   styleUrls: ['paginator.component.scss'],
-  template: `<div class="flex justify-between">
+  template: `<div class="flex justify-between" *ngIf="isShowPaginator()">
     <button
       class="paginator__arrow"
       [disabled]="isFirstPage()"
@@ -58,13 +58,15 @@ export class PaginatorComponent {
 
   private readonly router = inject(Router);
 
-  totalProps = signal<number>(1);
+  totalProps = signal<number>(0);
   @Input() set total(value: number) {
+    console.log('total', value);
     this.totalProps.set(value);
   }
 
   currentPageProp = signal<number>(1);
   @Input() set currentPage(value: number) {
+    console.log('cure', value);
     this.currentPageProp.set(value);
   }
 
@@ -76,6 +78,10 @@ export class PaginatorComponent {
     } else {
       return Math.floor(this.pageRangeDisplayed / 2);
     }
+  });
+
+  isShowPaginator = computed(() => {
+    return this.totalProps() > this.limit;
   });
 
   totalPages = computed(() => Math.ceil(this.totalProps() / this.limit));

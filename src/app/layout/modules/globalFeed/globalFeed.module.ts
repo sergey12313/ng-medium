@@ -5,6 +5,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {GlobalFeedComponent} from './components/globalFeed.component';
 import {FeedModule} from 'src/app/shared/modules/feed/feed.module';
 import {TagListModule} from 'src/app/shared/modules/tagList/tagList.module';
+import {FeedSelectorModule} from 'src/app/shared/modules/feedSelector/feedSelector.module';
 
 const routes: Routes = [{path: '', component: GlobalFeedComponent}];
 
@@ -14,6 +15,7 @@ const routes: Routes = [{path: '', component: GlobalFeedComponent}];
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FeedSelectorModule,
     FeedModule,
     TagListModule,
   ],

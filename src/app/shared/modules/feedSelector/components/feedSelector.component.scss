@@ -1,0 +1,9 @@
+.tag {
+  @apply px-3 py-[2px] rounded-full text-xs border inline-block;
+  &.ghost {
+    @apply text-slate-400 border-slate-400 hover:text-primary hover:border-primary;
+  }
+  &.solid {
+    @apply text-white bg-slate-400 border-slate-400 hover:bg-slate-500 hover:border-slate-500;
+  }
+}
