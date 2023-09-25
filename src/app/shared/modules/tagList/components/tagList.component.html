@@ -1,0 +1,9 @@
+<div class="bg-gray-50 p-4 rounded-md">
+  <h3 class="font-medium mb-1">Популярные теги</h3>
+  <mc-tag
+    *ngFor="let item of tags$ | async"
+    [tag]="'tag ' + item"
+    variant="solid"
+    class="mx-0.5"
+  ></mc-tag>
+</div>
