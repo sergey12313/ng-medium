@@ -60,21 +60,23 @@ export class PaginatorComponent {
 
   totalProps = signal<number>(1);
   @Input() set total(value: number) {
-    console.log('total', value);
     this.totalProps.set(value);
   }
 
   currentPageProp = signal<number>(1);
   @Input() set currentPage(value: number) {
-    console.log('currentPage', value);
     this.currentPageProp.set(value);
   }
 
   @Input({required: true, alias: 'url'}) urlProps!: string;
 
-  middleValue = computed(() =>
-    Math.min(Math.floor(this.pageRangeDisplayed / 2), this.totalProps())
-  );
+  middleValue = computed(() => {
+    if (this.totalPages() < this.limit) {
+      return 1;
+    } else {
+      return Math.floor(this.pageRangeDisplayed / 2);
+    }
+  });
 
   totalPages = computed(() => Math.ceil(this.totalProps() / this.limit));
 

@@ -15,6 +15,7 @@ import {TopBarModule} from './layout/modules/topBar/topBar.module';
 import {registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import {TagFeedModule} from './layout/modules/tagFeed/tagFeed.module';
 
 registerLocaleData(localeRu);
 
@@ -26,6 +27,7 @@ registerLocaleData(localeRu);
     AppRoutingModule,
     TopBarModule,
     GlobalFeedModule,
+    TagFeedModule,
     AuthModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),

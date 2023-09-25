@@ -23,7 +23,11 @@
       >Читать далее</a
     >
     <div class="inline-flex gap-1">
-      <mc-tag *ngFor="let tag of articleProps.tagList" [tag]="tag"></mc-tag>
+      <mc-tag
+        *ngFor="let tag of articleProps.tagList"
+        [tag]="tag"
+        [link]="['/', 'tag', tag]"
+      ></mc-tag>
     </div>
   </div>
 </article>

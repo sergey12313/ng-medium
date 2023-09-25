@@ -2,8 +2,9 @@
   <h3 class="font-medium mb-1">Популярные теги</h3>
   <mc-tag
     *ngFor="let item of tags$ | async"
-    [tag]="'tag ' + item"
+    [tag]="item"
     variant="solid"
+    [link]="['/', 'tag', item]"
     class="mx-0.5"
   ></mc-tag>
 </div>

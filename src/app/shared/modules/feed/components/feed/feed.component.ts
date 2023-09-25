@@ -1,4 +1,12 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {Store, select} from '@ngrx/store';
 
 import {Observable, Subscription} from 'rxjs';
@@ -19,13 +27,23 @@ import {environment} from 'src/environments/environment';
   selector: 'mc-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
-export class FeedComponent implements OnInit, OnDestroy {
+export class FeedComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     readonly store: Store,
     readonly router: Router,
     readonly route: ActivatedRoute
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      !changes['slugProps'].firstChange &&
+      changes['slugProps'].currentValue !== changes['slugProps'].previousValue
+    ) {
+      this.fetchData();
+    }
+  }
 
   ngOnDestroy(): void {
     this.currentPageSub.unsubscribe();
