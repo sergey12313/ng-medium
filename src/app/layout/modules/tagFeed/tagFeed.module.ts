@@ -1,23 +1,23 @@
-import {NgModule} from '@angular/core';
+import {NgModule, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {RouterModule, Routes} from '@angular/router';
-import {GlobalFeedComponent} from './components/globalFeed.component';
+import {ActivatedRoute, RouterModule, Routes} from '@angular/router';
 import {FeedModule} from 'src/app/shared/modules/feed/feed.module';
 import {TagListModule} from 'src/app/shared/modules/tagList/tagList.module';
+import {TagFeedComponent} from './components/tagFeed.component';
 import {FeedSelectorModule} from 'src/app/shared/modules/feedSelector/feedSelector.module';
 
-const routes: Routes = [{path: '', component: GlobalFeedComponent}];
+const routes: Routes = [{path: 'tag/:slug', component: TagFeedComponent}];
 
 @NgModule({
-  declarations: [GlobalFeedComponent],
+  declarations: [TagFeedComponent],
   providers: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FeedSelectorModule,
     FeedModule,
+    FeedSelectorModule,
     TagListModule,
   ],
 })
-export class GlobalFeedModule {}
+export class TagFeedModule {}

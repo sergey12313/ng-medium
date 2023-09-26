@@ -34,7 +34,6 @@ export const getCurrentUserEffect = createEffect(
               environment.localStorageTokenKey,
               currentUser.token
             );
-            console.log(currentUser);
             return getCurrentUserSuccessAction({currentUser});
           }),
           catchError(() => {

@@ -12,7 +12,6 @@ export class FeedService {
     if (options) {
       params = params.appendAll(options);
     }
-    console.log(params);
     const fullUrl = environment.apiUrl + slug;
     return this.http.get<FeedResponseInterface>(fullUrl, {params});
   }

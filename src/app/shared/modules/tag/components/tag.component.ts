@@ -8,6 +8,6 @@ import {RouterLink} from '@angular/router';
 })
 export class TagComponent {
   @Input({alias: 'tag', required: true}) tagProps!: string;
-  @Input({alias: 'link'}) linkProps?: RouterLink;
+  @Input({alias: 'link'}) linkProps?: RouterLink['routerLink'];
   @Input({alias: 'variant'}) variantProps?: 'solid' | 'ghost' = 'ghost';
 }
