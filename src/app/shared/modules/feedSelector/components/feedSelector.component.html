@@ -1,4 +1,21 @@
 <div class="flex gap-3">
-  <a [routerLink]="['/', 'feed']" class="link">Личная лента</a>
-  <a [routerLink]="['/']" class="link">Глобальная лента</a>
+  <a
+    *ngIf="isLoggedIn$ | async"
+    [routerLink]="['/', 'feed']"
+    routerLinkActive="text-primary underline"
+    >Личная лента</a
+  >
+  <a
+    [routerLink]="['/']"
+    routerLinkActive="text-primary underline "
+    [routerLinkActiveOptions]="{exact: true}"
+    >Глобальная лента</a
+  >
+  <a
+    *ngIf="tagProps"
+    [routerLink]="['/', 'tag', tagProps]"
+    routerLinkActive="text-primary underline "
+    [routerLinkActiveOptions]="{exact: true}"
+    >#{{ tagProps }}</a
+  >
 </div>

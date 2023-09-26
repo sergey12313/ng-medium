@@ -1,16 +1,18 @@
-
-
-<mc-feed-skeleton *ngIf="(isLoading$ | async); else content" [count]="3"></mc-feed-skeleton>
+<div *ngIf="(totalArticles$ | async) === 0">Нет постов</div>
+<mc-feed-skeleton
+  *ngIf="isLoading$ | async; else content"
+  [count]="3"
+></mc-feed-skeleton>
 <ng-template #content>
   <div class="flex flex-col gap-5">
     <mc-article-preview
-    *ngFor="let article of (feedData$ | async)?.articles"
-    [article]="article"
+      *ngFor="let article of (feedData$ | async)?.articles"
+      [article]="article"
     ></mc-article-preview>
   </div>
   <mc-paginator
-  [total]="(totalArticles$ | async) || 0"
-  [currentPage]="currentPage"
-  [url]="baseUrl"
+    [total]="(totalArticles$ | async) || 0"
+    [currentPage]="currentPage"
+    [url]="baseUrl"
   ></mc-paginator>
 </ng-template>
