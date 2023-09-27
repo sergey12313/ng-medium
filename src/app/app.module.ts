@@ -7,9 +7,9 @@ import {AuthModule} from './auth/auth.module';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
-import {PersistenceService} from './shared/service/persistence.service';
+import {PersistenceService} from './shared/services/persistence.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AuthInterceptor} from './shared/service/auth.interceptor';
+import {AuthInterceptor} from './shared/services/auth.interceptor';
 import {GlobalFeedModule} from './layout/modules/globalFeed/globalFeed.module';
 import {TopBarModule} from './layout/modules/topBar/topBar.module';
 import {registerLocaleData} from '@angular/common';
@@ -17,6 +17,8 @@ import localeRu from '@angular/common/locales/ru';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {TagFeedModule} from './layout/modules/tagFeed/tagFeed.module';
 import {UserFeedModule} from './layout/modules/userFeed/userFeed.module';
+import {SidebarModule} from './layout/modules/sidebar/sidebar.module';
+import {SidebarService} from './layout/modules/sidebar/services/sidebar.service';
 
 registerLocaleData(localeRu);
 
@@ -29,6 +31,7 @@ registerLocaleData(localeRu);
     TopBarModule,
     GlobalFeedModule,
     TagFeedModule,
+    SidebarModule,
     UserFeedModule,
     AuthModule,
     StoreModule.forRoot({}, {}),
@@ -37,6 +40,7 @@ registerLocaleData(localeRu);
   ],
   providers: [
     PersistenceService,
+    SidebarService,
     {provide: LOCALE_ID, useValue: 'ru'},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],

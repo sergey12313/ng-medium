@@ -23,12 +23,12 @@ body {
   @apply bg-primary px-14 py-3 rounded text-white text-xs font-medium cursor-pointer hover:bg-indigo-500 focus:bg-indigo-500 disabled:bg-slate-400 disabled:cursor-not-allowed outline-none  focus:outline-primary focus:outline-offset-0;
 }
 .auth-form {
-  @apply flex justify-center mt-12 items-center flex-col gap-4;
+  @apply flex px-5 justify-center mt-3 md:mt-12 items-center flex-col gap-2 md:gap-4;
   &__title {
     @apply text-2xl font-medium;
   }
   &__card {
-    @apply shadow-shadowCard rounded-md p-12 min-w-[460px] flex flex-col gap-8 pt-12 pb-20;
+    @apply shadow-shadowCard rounded-md p-12 min-w-[340px] md:min-w-[450px] flex flex-col gap-4 md:gap-8  pt-6 md:pt-12 pb-12 md:pb-20;
   }
   &__label {
     @apply text-slate-500 font-medium text-sm;
@@ -39,5 +39,5 @@ body {
 }
 
 a.link {
-  @apply text-primary hover:underline
+  @apply text-primary hover:underline;
 }

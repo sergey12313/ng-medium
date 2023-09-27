@@ -1,22 +1,13 @@
-<form
-  class="auth-form"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
->
+<form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2 class="auth-form__title">Вход</h2>
   <a [routerLink]="['/register']" class="link">Нет аккаунта?</a>
-  <mc-backend-error-messages  [errors]="backendErrors$ | async"></mc-backend-error-messages>
-  <div
-    class="auth-form__card"
-  >
+  <mc-backend-error-messages
+    [errors]="backendErrors$ | async"
+  ></mc-backend-error-messages>
+  <div class="auth-form__card">
     <fieldset class="auth-form__fieldset">
       <label class="auth-form__label" for="email">Email</label>
-      <input
-        type="text"
-        class="input"
-        formControlName="email"
-        id="email"
-      />
+      <input type="text" class="input" formControlName="email" id="email" />
     </fieldset>
     <fieldset class="auth-form__fieldset">
       <label class="auth-form__label" for="password">Пароль</label>
@@ -29,11 +20,7 @@
     </fieldset>
   </div>
 
-  <button
-    class="button"
-    type="submit"
-    [disabled]="isSubmitting$ | async"
-  >
+  <button class="button" type="submit" [disabled]="isSubmitting$ | async">
     Войти
   </button>
 </form>

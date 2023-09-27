@@ -1,23 +1,21 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {SidebarService} from '../services/sidebar.service';
 import {Store, select} from '@ngrx/store';
-import {Observable, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Observable, Subscription, map} from 'rxjs';
 import {isLoggedInSelector, userSelector} from 'src/app/auth/store/selectors';
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface';
 import {Nullable} from 'src/app/shared/types/util.types';
-import {SidebarService} from '../../sidebar/services/sidebar.service';
 
 @Component({
-  selector: 'app-top-bar',
-  templateUrl: './topBar.component.html',
-  styleUrls: ['./topBar.component.scss'],
+  selector: 'mc-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
 })
-export class TopBarComponent implements OnInit, OnDestroy {
+export class SidebarComponent {
   isLoggedIn$!: Observable<boolean>;
   currentUserSub!: Subscription;
 
   currentUser: Nullable<CurrentUserInterface> = null;
-
   constructor(readonly store: Store, readonly sidebarService: SidebarService) {}
   ngOnDestroy(): void {
     this.currentUserSub.unsubscribe();
@@ -36,5 +34,10 @@ export class TopBarComponent implements OnInit, OnDestroy {
       .subscribe((value) => {
         this.currentUser = value;
       });
+  }
+  outsideHandler() {
+    if (this.sidebarService.isOpened) {
+      this.sidebarService.close();
+    }
   }
 }

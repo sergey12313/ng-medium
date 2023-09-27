@@ -13,7 +13,8 @@ content: [
       colors: {
         primary: '#6E79D6',
 
-      }
+      },
+
     },
   },
   plugins: [],

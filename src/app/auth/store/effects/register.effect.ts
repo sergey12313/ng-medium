@@ -10,7 +10,7 @@ import {
 } from '../action/register.action';
 import {of} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
-import {PersistenceService} from 'src/app/shared/service/persistence.service';
+import {PersistenceService} from 'src/app/shared/services/persistence.service';
 import {Router} from '@angular/router';
 
 export const registerEffect = createEffect(
@@ -40,4 +40,3 @@ export const registerEffect = createEffect(
   },
   {functional: true}
 );
-
