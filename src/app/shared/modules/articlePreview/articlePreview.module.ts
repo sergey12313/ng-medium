@@ -5,6 +5,7 @@ import {AvatarModule} from '../avatar/avatar.module';
 import {NgIconsModule} from '@ng-icons/core';
 import {heroHeart} from '@ng-icons/heroicons/outline';
 import {TagModule} from '../tag/tag.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [ArticlePreviewComponent],
@@ -15,6 +16,7 @@ import {TagModule} from '../tag/tag.module';
     AvatarModule,
     NgIconsModule.withIcons({heroHeart}),
     TagModule,
+    RouterModule,
   ],
 })
 export class ArticlePreviewModule {}

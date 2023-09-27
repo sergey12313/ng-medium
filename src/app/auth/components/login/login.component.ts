@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   initializeForm(): void {
     this.form = this.formBuilder.group({
-      email: ['serg2@sv-tel.ru'],
+      email: ['sdf@fgsdf'],
       password: ['12345678'],
     });
   }

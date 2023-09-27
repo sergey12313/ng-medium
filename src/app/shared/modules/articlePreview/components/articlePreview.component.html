@@ -16,10 +16,11 @@
       {{ articleProps.favoritesCount }}
     </button>
   </div>
-  <h2 class="text-xl font-semibold">{{ articleProps.title }}</h2>
-  <p>{{ articleProps.description }}</p>
+
+  <a [routerLink]="['articles', articleProps.slug]"><h2 class="text-xl font-semibold">{{ articleProps.title }}</h2></a>
+<p>{{ articleProps.description }}</p>
   <div class="flex justify-between">
-    <a href="#" class="text-slate-500 text-xs hover:text-primary"
+    <a [routerLink]="['articles', articleProps.slug]" class="text-slate-500 text-xs hover:text-primary"
       >Читать далее</a
     >
     <div class="inline-flex gap-1">
