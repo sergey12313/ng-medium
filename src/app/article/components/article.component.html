@@ -1,0 +1,107 @@
+<article class="flex flex-col gap-4">
+  <header class="bg-stone-700 text-white text">
+    <div class="container px-2 mx-auto py-4 flex flex-col gap-4">
+      <h2 class="text-xl md:text-2xl font-semibold text-center md:text-left">
+        {{ article.title }}
+      </h2>
+
+      <div
+        class="flex gap-2 items-center flex-col md:flex-row md:justify-between"
+      >
+        <div class="flex gap-2 items-center">
+          <mc-avatar [imageUrl]="article.author.image" size="md"></mc-avatar>
+          <div class="flex flex-col">
+            <a href="#" class="text-xs link">{{ article.author.username }}</a>
+            <span class="text-xs">{{
+              article.createdAt | date : 'd LLL в hh:mm'
+            }}</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 items-center md:flex-row">
+          <button
+            class="border-white border px-2 rounded bg-white text-stone-700 text-sm flex items-center gap-1"
+          >
+            <ng-icon
+              class="text-primary"
+              name="heroPlus"
+              class="text-stone-700"
+            ></ng-icon>
+            {{ article.author.following ? 'Отписаться' : 'Подписаться' }}
+          </button>
+          <button
+            class="border-primary border px-2 rounded text-white bg-primary text-sm flex items-center gap-1"
+          >
+            <ng-icon
+              class="text-primary"
+              name="heroHeart"
+              class="text-white"
+            ></ng-icon>
+            {{ article.favorited ? 'Удалить из избранного' : 'В избранное' }}
+            ({{ article.favoritesCount }})
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="container mx-auto px-2 py-3 flex gap-2 flex-col border-b">
+    <div [innerHTML]="article.body | replaceLineBreaks"></div>
+    <div class="inline-flex gap-1">
+      <mc-tag
+        *ngFor="let tag of article.tagList"
+        [tag]="tag"
+        [link]="['/', 'tag', tag]"
+      ></mc-tag>
+    </div>
+  </main>
+  <div>
+    <div
+      class="container mx-auto flex-col flex gap-2 md:flex-row items-center justify-center px-2"
+    >
+      <div class="flex gap-2 items-center">
+        <mc-avatar [imageUrl]="article.author.image" size="md"></mc-avatar>
+        <div class="flex flex-col">
+          <a href="#" class="text-xs link">{{ article.author.username }}</a>
+          <span class="text-xs">{{
+            article.createdAt | date : 'd LLL в hh:mm'
+          }}</span>
+        </div>
+      </div>
+      <button
+        class="border-stone-800 border px-2 rounded bg-white text-stone-700 text-sm flex items-center gap-1"
+      >
+        <ng-icon
+          class="text-primary"
+          name="heroPlus"
+          class="text-stone-700"
+        ></ng-icon>
+        {{ article.author.following ? 'Отписаться' : 'Подписаться' }}
+      </button>
+      <button
+        class="border-primary border px-2 rounded text-white bg-primary text-sm flex items-center gap-1"
+      >
+        <ng-icon
+          class="text-primary"
+          name="heroHeart"
+          class="text-white"
+        ></ng-icon>
+        {{ article.favorited ? 'Удалить из избранного' : 'В избранное' }}
+        ({{ article.favoritesCount }})
+      </button>
+    </div>
+  </div>
+  <div class="container mx-auto pb-10 flex justify-center">
+    <div class="w-9/12 border rounded-md">
+      <textarea
+        name=""
+        id=""
+        rows="4"
+        placeholder="Написать комментарий..."
+        class="w-full resize-none rounded-t-md rounded-br-none p-4 m-0"
+      ></textarea>
+      <div class="px-4 py-3 bg-slate-200 flex justify-between items-center">
+        <mc-avatar [imageUrl]="article.author.image" size="md"></mc-avatar>
+        <button class="button">Отправить</button>
+      </div>
+    </div>
+  </div>
+</article>
