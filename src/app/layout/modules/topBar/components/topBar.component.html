@@ -1,7 +1,12 @@
 <header class="h-16 shadow-shadowCard">
-  <div class="container mx-auto flex justify-between items-center h-full  px-5 lg:px-auto">
+  <div
+    class="container mx-auto flex justify-between items-center h-full px-5 lg:px-auto"
+  >
     <a href="" class="text-primary font-black text-xl">ng-medium</a>
-    <nav class="hidden  text-slate-400 md:flex gap-4 text-md ">
+    <button class="md:hidden" (click)="sidebarService.toggle()">
+      <ng-icon class="text-2xl hover:text-primary" name="matMenu"></ng-icon>
+    </button>
+    <nav class="hidden text-slate-400 md:flex gap-4 text-md">
       <a
         [routerLink]="['']"
         routerLinkActive="text-indigo-400"

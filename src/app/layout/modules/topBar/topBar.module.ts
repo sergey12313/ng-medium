@@ -3,7 +3,11 @@ import {CommonModule} from '@angular/common';
 
 import {RouterModule} from '@angular/router';
 import {NgIconsModule} from '@ng-icons/core';
-import {matPostAdd, matSettings} from '@ng-icons/material-icons/baseline';
+import {
+  matPostAdd,
+  matSettings,
+  matMenu,
+} from '@ng-icons/material-icons/baseline';
 import {TopBarComponent} from './components/topBar.component';
 import {AvatarModule} from 'src/app/shared/modules/avatar/avatar.module';
 
@@ -15,7 +19,7 @@ import {AvatarModule} from 'src/app/shared/modules/avatar/avatar.module';
     CommonModule,
     AvatarModule,
     RouterModule,
-    NgIconsModule.withIcons({matPostAdd, matSettings}),
+    NgIconsModule.withIcons({matPostAdd, matSettings, matMenu}),
   ],
 })
 export class TopBarModule {}

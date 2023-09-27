@@ -6,7 +6,7 @@ import {map, exhaustMap, catchError, tap} from 'rxjs/operators';
 
 import {of} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
-import {PersistenceService} from 'src/app/shared/service/persistence.service';
+import {PersistenceService} from 'src/app/shared/services/persistence.service';
 
 import {
   loginAction,

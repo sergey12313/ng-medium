@@ -2,7 +2,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {inject} from '@angular/core';
 import {createEffect, Actions, ofType} from '@ngrx/effects';
 import {map, exhaustMap, catchError, of} from 'rxjs';
-import {PersistenceService} from 'src/app/shared/service/persistence.service';
+import {PersistenceService} from 'src/app/shared/services/persistence.service';
 import {environment} from 'src/environments/environment';
 import {AuthService} from '../../services/auth.service';
 import {

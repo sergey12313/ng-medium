@@ -1,0 +1,57 @@
+<div
+  class="md:hidden fixed top-0 right-0 bottom-0 transition-transform ease-in-out duration-150 w-[250px] bg-white z-50 shadow-shadowCard"
+  [class]="sidebarService.isOpened ? 'translate-x-0' : 'translate-x-[250px]'"
+  clickOutside
+  (clickOutside)="outsideHandler()"
+>
+  <nav
+    class="flex flex-col text-slate-400 text-md py-5 px-4"
+    (click)="sidebarService.close()"
+  >
+    <ng-container *ngIf="currentUser">
+      <a href="#" class="inline-flex gap-1 py-2 self-center border-b">
+        <mc-avatar [imageUrl]="currentUser.image"></mc-avatar>
+        {{ currentUser.username }}
+      </a>
+    </ng-container>
+    <a
+      [routerLink]="['']"
+      routerLinkActive="text-indigo-400"
+      [routerLinkActiveOptions]="{exact: true}"
+      class="inline-flex gap-1 items-center py-2"
+      ><ng-icon name="matHome"></ng-icon>Главная</a
+    >
+    <ng-container *ngIf="isLoggedIn$ | async; else authLinks">
+      <a
+        href="#"
+        routerLinkActive="text-indigo-400"
+        class="inline-flex gap-1 items-center py-2"
+        ><ng-icon name="matPostAdd"></ng-icon> Новый пост</a
+      >
+      <a
+        href="#"
+        routerLinkActive="text-indigo-400"
+        class="inline-flex gap-1 items-center py-2"
+      >
+        <ng-icon name="matSettings"></ng-icon>Настройки</a
+      >
+    </ng-container>
+
+    <ng-template #authLinks>
+      <a
+        [routerLink]="['/login']"
+        routerLinkActive="text-indigo-400"
+        class="inline-flex gap-1 items-center py-2"
+      >
+        <ng-icon name="matSettings"></ng-icon>Войти</a
+      >
+      <a
+        [routerLink]="['/register']"
+        routerLinkActive="text-indigo-400"
+        class="inline-flex gap-1 items-center py-2"
+      >
+        <ng-icon name="matPersonAddAlt1"></ng-icon>Регистрация</a
+      >
+    </ng-template>
+  </nav>
+</div>
