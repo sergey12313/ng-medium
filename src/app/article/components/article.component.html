@@ -1,4 +1,4 @@
-<article class="flex flex-col gap-4">
+<article class="flex flex-col" *ngIf="article">
   <header class="bg-stone-700 text-white text">
     <div class="container px-2 mx-auto py-4 flex flex-col gap-4">
       <h2 class="text-xl md:text-2xl font-semibold text-center md:text-left">
@@ -43,7 +43,7 @@
       </div>
     </div>
   </header>
-  <main class="container mx-auto px-2 py-3 flex gap-2 flex-col border-b">
+  <main class="container mx-auto  flex gap-2 flex-col border-b bg-gray-100 px-10 pb-8 pt-5">
     <div [innerHTML]="article.body | replaceLineBreaks"></div>
     <div class="inline-flex gap-1">
       <mc-tag
@@ -53,9 +53,9 @@
       ></mc-tag>
     </div>
   </main>
-  <div>
+  <div >
     <div
-      class="container mx-auto flex-col flex gap-2 md:flex-row items-center justify-center px-2"
+      class="container my-8 mx-auto flex-col flex gap-2 md:flex-row items-center justify-center px-2"
     >
       <div class="flex gap-2 items-center">
         <mc-avatar [imageUrl]="article.author.image" size="md"></mc-avatar>

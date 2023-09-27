@@ -5,8 +5,13 @@ import {CommonModule} from '@angular/common';
 import {AvatarModule} from '../shared/modules/avatar/avatar.module';
 import {heroHeart, heroPlus} from '@ng-icons/heroicons/outline';
 import {NgIconsModule} from '@ng-icons/core';
+
+import * as getArticleEffect from './store/effects/getArticle.effect';
 import {ReplaceLineBreaks} from '../shared/pipes/replaceLineBreaks.pipe';
 import {TagModule} from '../shared/modules/tag/tag.module';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {articleReducer} from './store/reducer';
 const routes: Routes = [
   {
     path: 'articles/:slug',
@@ -20,6 +25,8 @@ const routes: Routes = [
     CommonModule,
     AvatarModule,
     TagModule,
+    EffectsModule.forFeature({...getArticleEffect}),
+    StoreModule.forFeature('article', articleReducer),
     RouterModule.forChild(routes),
     NgIconsModule.withIcons({heroHeart, heroPlus}),
   ],

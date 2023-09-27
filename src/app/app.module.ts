@@ -20,6 +20,7 @@ import {UserFeedModule} from './layout/modules/userFeed/userFeed.module';
 import {SidebarModule} from './layout/modules/sidebar/sidebar.module';
 import {SidebarService} from './layout/modules/sidebar/services/sidebar.service';
 import {ArticleModule} from './article/article.module';
+import {ArticleService} from './shared/services/articleService';
 
 registerLocaleData(localeRu);
 
@@ -43,6 +44,7 @@ registerLocaleData(localeRu);
   providers: [
     PersistenceService,
     SidebarService,
+    ArticleService,
     {provide: LOCALE_ID, useValue: 'ru'},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],

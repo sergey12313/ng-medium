@@ -1,5 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Store, select} from '@ngrx/store';
+import {Subscription} from 'rxjs';
 import {ArticleInterface} from 'src/app/shared/types/article.interface';
+import {getArticleAction} from '../store/actions/getArticle.action';
+import {articledDataSelector} from '../store/selectors';
+import {Nullable} from 'src/app/shared/types/util.types';
 
 const post: ArticleInterface = {
   slug: 'Try-to-bypass-the-SAS-card-maybe-it-will-transmit-the-solid-state-system!-120863',
@@ -26,6 +32,34 @@ const post: ArticleInterface = {
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
 })
-export class ArticleComponent {
-  article = post;
+export class ArticleComponent implements OnInit, OnDestroy {
+  slug!: string;
+  article: Nullable<ArticleInterface> = null;
+
+  articleSub!: Subscription;
+
+  constructor(
+    readonly store: Store,
+    readonly router: Router,
+    readonly route: ActivatedRoute
+  ) {}
+  ngOnDestroy(): void {
+    this.articleSub.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.initializeValue();
+    this.initializeListeners();
+    this.fetchData();
+  }
+  private initializeValue() {
+    this.slug = this.route.snapshot.paramMap.get('slug') as string;
+  }
+  private fetchData() {
+    this.store.dispatch(getArticleAction({slug: this.slug}));
+  }
+  private initializeListeners() {
+    this.articleSub = this.store
+      .pipe(select(articledDataSelector))
+      .subscribe((article) => (this.article = article));
+  }
 }
