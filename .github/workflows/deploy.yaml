@@ -19,7 +19,7 @@ jobs:
       - name: Install
         run: npm ci
       - name: Build
-        run: npm run build -- -c production --base-href "https://sergey12313.github.io/ng-medium/"
+        run: npm run build -- -c production --base-href "/ng-medium/"
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
